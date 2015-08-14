@@ -1,0 +1,18 @@
+{
+    "contents" : "outcome <- read.csv(\"outcome-of-care-measures.csv\", colClasses = \"character\") \nhead(outcome)\noutcome[, 11] <- as.numeric(outcome[, 11])\nhist(outcome[, 11])",
+    "created" : 1439433593518.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "144651575",
+    "id" : "A2A3A744",
+    "lastKnownWriteTime" : 1439433839,
+    "path" : "C:/Users/Alan/Desktop/RLearning/ProgrammingAssignment3/r.R",
+    "project_path" : "r.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

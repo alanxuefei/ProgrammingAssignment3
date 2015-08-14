@@ -1,0 +1,18 @@
+{
+    "contents" : " \nbest <- function(state, outcome) {\n  ## Read outcome data \n\n  thedata <- read.csv(\"outcome-of-care-measures.csv\", colClasses = \"character\", na.strings=\"Not Available\") \n  ## Check that state and outcome are valid \\\n    \n  validOutcome <- c(\"Heart Attack\",\"Heart Failure\",\"Pneumonia\")\n  moutcome<-grepl(pattern = outcome, x = validOutcome, ignore.case = T )\n  ##print (validOutcome[moutcome])\n  if (sum(moutcome)!=1){\n    stop(\"invalid outcome\")\n  }\n  validState = unique(thedata$State)\n  if (!state %in% validState) stop(print(\"invalid state\"))\n  \n  thecolumn<-paste(\"Hospital.30.Day.Death..Mortality..Rates.from.\", gsub(\" \",\".\",validOutcome[moutcome]), sep = \"\")\n  ##  print(thecolumn)\n  \n  result1<-thedata[which(thedata$State==state),]\n  ##print (result1[[thecolumn]])\n  minmumdata<-min(as.numeric(result1[[thecolumn]]), na.rm=TRUE)\n  ## print(result1[,c(thecolumn,\"Hospital.Name\")])\n  ## print(minmumdata)\n  result2<-result1[which(result1[[thecolumn]]==minmumdata),]\n ## str(result2)\n \n  \n\n    result3<-result2[order(result2$Hospital.Name),]\n  ##str(result3)\n    ## print(result2$Hospital.Name)\n    return (result3$Hospital.Name[1])\n \n}\n## best(\"NY\", \"pneumonia\")\n##  best(\"TX\", \"heart attack\")\n  best(\"TX\", \"heart failure\")\n  ## best(\"MD\", \"heart attack\")\n  ##  best(\"MD\", \"pneumonia\")\n  ##   best(\"BB\", \"heart attack\")\n  ##  best(\"NY\", \"hert attack\")\n \n",
+    "created" : 1439435595023.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1717212098",
+    "id" : "2A9149CA",
+    "lastKnownWriteTime" : 1439468651,
+    "path" : "C:/Users/Alan/Desktop/RLearning/ProgrammingAssignment3/best.R",
+    "project_path" : "best.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

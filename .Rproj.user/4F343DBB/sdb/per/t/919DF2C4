@@ -1,0 +1,18 @@
+{
+    "contents" : "\nrankall <- function(outcome, num = \"best\") {\n  ## Read outcome data \n  \n  thedata <- read.csv(\"outcome-of-care-measures.csv\", colClasses = \"character\", na.strings=\"Not Available\") \n  ## Check that state and outcome are valid \\\n  \n  validOutcome <- c(\"Heart Attack\",\"Heart Failure\",\"Pneumonia\")\n  moutcome<-grepl(pattern = outcome, x = validOutcome, ignore.case = T )\n  ##print (validOutcome[moutcome])\n  if (sum(moutcome)!=1){\n    stop(\"invalid outcome\")\n  }\n  validState =   sort(unique(thedata$State)) \n   \n  thecolumn<-paste(\"Hospital.30.Day.Death..Mortality..Rates.from.\", gsub(\" \",\".\",validOutcome[moutcome]), sep = \"\")\n  ##  print(thecolumn)\n  ##finalresult<-c(\"hospital\", \"state\");\n  for (state in validState) {\n \n    ## Return hospital name in that state with the given rank\n    result<-thedata[which(thedata$State==state),]\n    if (num==\"worst\"){\n      result<-result[order(-as.numeric(result[[thecolumn]]),result$Hospital.Name),]\n      result<-result[1,]\n    }else{\n      if (num==\"best\") num<-as.numeric(1)\n        result<-result[order(as.numeric(result[[thecolumn]]),result$Hospital.Name),]\n        result<-result[num,]\n    }\n    \n     finalresult<-rbind(finalresult, c(result$Hospital.Name, state) )\n  }\n  \n  data.frame(hospital=finalresult[,1],state=finalresult[,2])\n}\n\n\n head(rankall(\"heart attack\", 20), 10)\n##tail(rankall(\"pneumonia\", \"worst\"), 3)\n##tail(rankall(?\"heart failure\"), 10)\n\n\n\n ",
+    "created" : 1439468938015.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2727480023",
+    "id" : "919DF2C4",
+    "lastKnownWriteTime" : 1439528816,
+    "path" : "C:/Users/Alan/Desktop/RLearning/ProgrammingAssignment3/rankall.R",
+    "project_path" : "rankall.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
